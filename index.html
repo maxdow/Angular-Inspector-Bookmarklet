@@ -1,14 +1,31 @@
-Angular-Inspector-Bookmarklet
-=============================
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular Inspector</title>
+	<style>
+	*,
+	*:after,
+	*::before {
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
 
-Angular Inspector is a Bookmarklet for inspecting scope, bindings and watches in an Angular Application.
+	body {
+		background: #eee;
+	}
+	.main {
+		text-align: center;
+		vertical-align: middle;
+		line-height: 90px;
+		font-size: 2.2em;
+	}
+	</style>
+</head>
+<body>
+<div class="main">
+Drag it to your favorites : <a href="javascript:(function()%7B(function()%20%7Bvar%20boxWatch%20%3D%20%22.ng-boxwatch%7Bposition%3Afixed%3Bright%3A10px%3Bbackground%3Argba(255%2C255%2C255%2C.91)%3Btop%3A10px%3Bz-index%3A9999%3Bborder%3A1px%20solid%20%23DBDBDB%3Bfont-size%3A2em%3Bcolor%3A%23222%3Bpadding%3A10px%3Bborder-radius%3A5px%7D%22%3Bvar%20scopebinding%20%3D%20%22.ng-binding%7Bbox-shadow%3Ainset%200%200%200%201px%20%2351C741%3Bbox-sizing%3Aborder-box%7D.ng-scope%7Bbackground%3Argba(255%2C61%2C0%2C.2)%3Bbox-shadow%3Ainset%200%200%200%201px%20rgba(255%2C0%2C0%2C.14)%7D.ng-scope%3Ahover%7Bbox-shadow%3Ainset%200%200%200%201px%20%23ff3d00!important%7D%22%3Bvar%20newcss%20%3D%20boxWatch%20%2B%20scopebinding%3Bif%20(%22%5Cv%22%20%3D%3D%20%22v%22)%20%2F*%20ie%20only%20*%2F%20%7Bdocument.createStyleSheet().cssText%20%3D%20newcss%3B%7D%20else%20%7Bvar%20tag%20%3D%20document.createElement(%22style%22)%3Btag.type%20%3D%20%22text%2Fcss%22%3Bdocument.getElementsByTagName(%22head%22)%5B0%5D.appendChild(tag)%3Btag%5B(typeof%20document.body.style.WebkitAppearance%20%3D%3D%20%22string%22)%20%2F*%20webkit%20only%20*%2F%20%3F%20%22innerText%22%20%3A%20%22innerHTML%22%5D%20%3D%20newcss%3B%7Dvar%20watchBox%20%3D%20document.createElement(%22div%22)%3Bvar%20scopeWatcherBox%20%3D%20document.createElement(%22span%22)%3Bvar%20separator%20%3D%20document.createElement(%22span%22)%3Bseparator.innerText%20%3D%20%22%20%2F%20%22%20%3Bvar%20appWatcherBox%20%3D%20document.createElement(%22span%22)%3BwatchBox.appendChild(scopeWatcherBox)%3BwatchBox.appendChild(separator)%3BwatchBox.appendChild(appWatcherBox)%3Bvar%20appBody%20%3D%20document.querySelectorAll(%22%5Bng-app%5D%22)%20%7C%7C%20document.getElementsByTagName(%22body%22)%3Bfunction%20getAppWatchers()%20%7BappWatcherBox.innerText%20%3D%20countWatchers(appBody)%3BsetTimeout(function()%20%7BgetAppWatchers()%3B%7D%2C%201000)%3B%7DgetAppWatchers()%3Bfunction%20countWatchers(element)%20%7Belement%20%3D%20angular.element(element)%3Bvar%20visitedId%20%3D%20%5B%5D%3Bvar%20watchers%20%3D%200%3Bvar%20f%20%3D%20function(%24element)%20%7Bvar%20scope%20%3D%20%24element.data().%24scope%3Bif%20(scope)%20%7Bif%20(scope.%24%24watchers)%20%7Bwatchers%20%2B%3D%20scope.%24%24watchers.length%3B%7D%7Dangular.forEach(%24element.children()%2C%20function(childElement)%20%7Bf(angular.element(childElement))%3B%7D)%3B%7D%3Bf(element)%3Breturn%20watchers%3B%7Dfunction%20updateCounter(element)%20%7BscopeWatcherBox.innerText%20%3D%20countWatchers(element)%3B%7DwatchBox.className%20%3D%20%22ng-boxwatch%22%3Bdocument.body.appendChild(watchBox)%3Bvar%20allScopes%20%3D%20document.getElementsByClassName(%22ng-scope%22)%3Bfunction%20hasClass(element%2C%20cls)%20%7Breturn%20('%20'%20%2B%20element.className%20%2B%20'%20').indexOf('%20'%20%2B%20cls%20%2B%20'%20')%20%3E%20-1%3B%7Dangular.forEach(allScopes%2C%20function(elm)%20%7Belm.addEventListener(%22mouseenter%22%2Cfunction(e)%20%7Bvar%20hoverElm%20%3D%20document.querySelectorAll(%20%22%3Ahover%22%20)%20%3Bvar%20i%20%3D%20hoverElm.length%20-%201%20%3Bwhile(!hasClass(hoverElm%5Bi%5D%2C%22ng-scope%22)%20%26%26%20i%3E%3D0)%20%7Bi--%3B%7DupdateCounter(hoverElm%5Bi%5D)%3B%7D%2Cfalse)%3Belm.addEventListener(%22mouseleave%22%2Cfunction(e)%20%7BupdateCounter(e.relatedTarget%2Ce)%3B%7D%2Cfalse)%3B%7D)%3B%7D)()%7D)()"><span>Angular Inspector</span></a>
 
-It shows you scopes in red, bindings in green.
-
-![preview](https://raw.githubusercontent.com/maxdow/Angular-Inspector-Bookmarklet/master/preview.jpg)
-
-On the top right, the box displays the watches of the selected scope ( by hovering it ) and the total count of application watches
-
-Here the [Angular Inspector](http://google.fr) Bookmarklet. Just drag it in your favorites and have fun.
-
-Fell free to comment !
+</div>
+</body>
+</html>
