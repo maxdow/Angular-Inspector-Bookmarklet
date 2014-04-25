@@ -12,3 +12,7 @@ On the top right, the box displays the watches of the selected scope ( by hoveri
 Here the [link](http://maxdow.github.io/Angular-Inspector-Bookmarklet/) to the Bookmarklet page. 
 
 Fell free to comment and have fun !
+
+## Contact
+
+Twitter [@maxdow](https://twitter.com/maxdow)
